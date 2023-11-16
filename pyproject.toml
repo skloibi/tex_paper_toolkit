@@ -1,0 +1,18 @@
+[project]
+name = "tex_paper_toolkit"
+version = "0.1.0"
+authors = [
+  { name="skloibi" },
+]
+description = "A simple python module that contains utilities for writing/plotting/evaluation scientific works. "
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/skloibi/tex_paper_toolkit"
+"Bug Tracker" = "https://github.com/skloibi/tex_paper_toolkit/issues"
