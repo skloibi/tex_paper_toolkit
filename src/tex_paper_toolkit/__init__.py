@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+"""
+tex_paper_toolkit is a library that simplifies export of values and texts into TeX format
+and can be used when analyzing/evaluating data for a paper.
+"""
 from tex_paper_toolkit.mixins import (
     ToolkitMixin,
     AnyStringMixin,
