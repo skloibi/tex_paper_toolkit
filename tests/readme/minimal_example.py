@@ -1,3 +1,6 @@
+"""
+A simple example showcasing the use of the DSL.
+"""
 from tex_paper_toolkit import DefaultToolkit
 
 # instantiate a toolkit object
@@ -13,7 +16,8 @@ tex.newcommand("constant2", 2, spell_digits=True)
 # (the label here is just to get a unique identifier for the toolkit)
 tex.texstring("emph-msg", r"\emph{Emphasized text}")
 
-# specify a custom serialization target for this particular string (could also be achieved by using different `Toolkit` instances)
+# specify a custom serialization target for this particular string
+# (could also be achieved by using different `Toolkit` instances)
 tex.texstring(
     "other-file-string",
     r"\textbf{Text in a different file!}",

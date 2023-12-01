@@ -1,4 +1,10 @@
-from pathlib import Path
+"""
+A simple example showcasing the use of custom mixins.
+"""
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
+# pylint: disable=too-many-ancestors
+
 from tex_paper_toolkit import DefaultToolkit, ToolkitMixin, Serializable
 
 

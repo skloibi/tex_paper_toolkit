@@ -1,3 +1,6 @@
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-function-docstring
+
 from pathlib import Path
 from pyfakefs.fake_filesystem import FakeFilesystem
 
@@ -8,8 +11,9 @@ def assert_file_content(path: Path, expected_content: str):
         assert actual_content == expected_content
 
 
+# pylint: disable=unused-argument
 def test_generates_minimal_samples(fs: FakeFilesystem):
-    import minimal_example  # pylint: disable=unused-import
+    import minimal_example  # pylint: disable=import-error,unused-import,import-outside-toplevel
 
     outfile = Path("tex_output.tex")
     custom_outfile = Path("tex_texstring_output.tex")
@@ -24,8 +28,9 @@ def test_generates_minimal_samples(fs: FakeFilesystem):
     assert_file_content(custom_outfile, "\\textbf{Text in a different file!}\n")
 
 
+# pylint: disable=unused-argument
 def test_generates_custom_mixins_samples(fs: FakeFilesystem):
-    import custom_mixins_example  # pylint: disable=unused-import
+    import custom_mixins_example  # pylint: disable=import-error,unused-import,import-outside-toplevel
 
     default_outfile = Path("tex_output.tex")
     assert default_outfile.is_file(), f"No file {default_outfile} was generated"
