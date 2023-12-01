@@ -10,8 +10,8 @@ from tex_paper_toolkit import DefaultToolkit, ToolkitMixin, Serializable
 
 class TextttString(Serializable):
     """
-    A custom mixin serializable that defines text that holds text that should be
-    formatted with a monospace font.
+    A custom mixin serializable that holds text that should be formatted in code
+    font.
     """
 
     def __init__(self, key, texttt_str):
