@@ -35,10 +35,10 @@ class MyCustomToolkit(TextttMixin, DefaultToolkit):
 tex = MyCustomToolkit()
 
 # manually add new TeX (constant) definitions (\\newcommand)
-tex.newcommand("constOne", 1)
+tex.newcommand("const", 1)
 
 # this overwrites the previous definition of 'constOne'
-tex.newcommand("constOne", 3, mathmode=False)
+tex.newcommand("const", 3, mathmode=False)
 
 # add custom TeX strings that should be directly serialized
 tex.texstring(
@@ -48,6 +48,8 @@ tex.texstring(
 
 # call our custom mixin method
 tex.texttt("code1", "val x = 10")
+
+print("SERIALIZING STUFF!!")
 
 # serialize the saved contents to the given TeX file
 tex.serialize(to_file="tex_output.tex")

@@ -51,7 +51,7 @@ def make_tex_identifier(
     if spell_digits:
 
         def is_num(c: str) -> bool:
-            return c >= "0" and c <= "9"
+            return "0" <= c <= "9"
 
         tex_identifier = "".join(
             [(DIGIT_LABELS[int(c)] if is_num(c) else c) for c in tex_identifier]

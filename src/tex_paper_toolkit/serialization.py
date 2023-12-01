@@ -77,7 +77,6 @@ class Serializable(Generic[T], metaclass=ABCMeta):
         str
             A valid TeX string representing this `Serializable`
         """
-        ...
 
     @property
     def key(self) -> T:
@@ -107,10 +106,11 @@ class Serializable(Generic[T], metaclass=ABCMeta):
         return f"{type(self)}:{self.key}"
 
 
-TS = TypeVar("TS", bound=Serializable)
+S = TypeVar("S", bound=Serializable)
 
 
-class Serializer(Generic[TS], metaclass=ABCMeta):
+# pylint: disable=too-few-public-methods
+class Serializer(Generic[S], metaclass=ABCMeta):
     """
     A base class for custom serializers that can be provided to `Serializable`s.
     This is an alternative to default serialization which simply writes the
@@ -118,13 +118,12 @@ class Serializer(Generic[TS], metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def serialize(self, serializable: TS) -> None:
+    def serialize(self, serializable: S) -> None:
         """
         Serializes the given `Serializable`.
 
         Parameters
         ----------
-        serializable : TS
+        serializable : S
             The target that should be serialized
         """
-        ...
