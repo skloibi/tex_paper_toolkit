@@ -55,7 +55,5 @@ tex.texstring(
 # call our custom mixin method
 tex.texttt("code1", "val x = 10")
 
-print("SERIALIZING STUFF!!")
-
 # serialize the saved contents to the given TeX file
 tex.serialize(to_file="tex_output.tex")

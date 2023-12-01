@@ -45,18 +45,14 @@ class TexToolkit(ToolkitMixin, metaclass=ABCMeta):
 
         target_locations = defaultdict[Path, list[Serializable]](list)
 
-        print("Writing", len(self._targets), "targets!")
-
         for target in self._targets.values():
             ser_target = target.get_path_or_default(path)
             if isinstance(ser_target, Serializer):
-                print("Writing custom serializer")
                 ser_target.serialize(target)
             else:
                 target_locations[ser_target].append(target)
 
         for path, entries in target_locations.items():
-            print("Writing to ", path)
             with open(path, "w", encoding="UTF-8") as outfile:
                 for entry in entries:
                     outfile.write(entry.serialize() + os.linesep)
