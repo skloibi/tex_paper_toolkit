@@ -1,6 +1,6 @@
 # TeX Paper Toolkit
 
-A simple python module that contains utilities for writing/plotting/evaluation scientific works.
+A simple Python DSL for serializing paper data into TeX format.
 
 ## Basic Usage
 
