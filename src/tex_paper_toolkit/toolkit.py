@@ -3,7 +3,6 @@ Module that defines the default toolkit type and provides a base implementation
 with the default mixins.
 """
 
-import os
 from collections import defaultdict
 from typing import Self
 from pathlib import Path
@@ -55,7 +54,7 @@ class TexToolkit(ToolkitMixin, metaclass=ABCMeta):
         for path, entries in target_locations.items():
             with open(path, "w", encoding="UTF-8") as outfile:
                 for entry in entries:
-                    outfile.write(entry.serialize() + os.linesep)
+                    outfile.write(entry.serialize() + "\n")
 
 
 class DefaultToolkit(NewCommandMixin, AnyStringMixin, TexToolkit):
