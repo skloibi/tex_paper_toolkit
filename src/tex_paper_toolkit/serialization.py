@@ -15,6 +15,7 @@ By default, we can either specify a string or Path path or define a custom
 serialization handler.
 """
 
+
 class Serializable(Generic[T], metaclass=ABCMeta):
     """
     Abstract base class for types that define components that are serializable
