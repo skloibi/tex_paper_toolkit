@@ -7,7 +7,7 @@ from collections import defaultdict
 from typing import Self
 from pathlib import Path
 from abc import ABCMeta
-from tex_paper_toolkit.serialization import Serializable, Serializer
+from tex_paper_toolkit.serialization import Serializable
 from tex_paper_toolkit.mixins import AnyStringMixin, NewCommandMixin, ToolkitMixin
 
 
@@ -46,10 +46,10 @@ class TexToolkit(ToolkitMixin, metaclass=ABCMeta):
 
         for target in self._targets.values():
             ser_target = target.get_path_or_default(path)
-            if isinstance(ser_target, Serializer):
-                ser_target.serialize(target)
-            else:
+            if isinstance(ser_target, Path):
                 target_locations[ser_target].append(target)
+            else:
+                ser_target(target)
 
         for path, entries in target_locations.items():
             with open(path, "w", encoding="UTF-8") as outfile:

@@ -4,17 +4,16 @@ types for custom extensions.
 """
 
 from abc import abstractmethod, ABCMeta
-from typing import Generic, TypeVar, Optional, Union
+from typing import Callable, Generic, TypeVar, Optional, Union
 from pathlib import Path
 
 T = TypeVar("T")
 
+SerTarget = Union[str, Path, "Serializer"]
 """
 By default, we can either specify a string or Path path or define a custom
 serialization handler.
 """
-SerTarget = Union[str, Path, "Serializer"]
-
 
 class Serializable(Generic[T], metaclass=ABCMeta):
     """
@@ -61,7 +60,7 @@ class Serializable(Generic[T], metaclass=ABCMeta):
             return target
         if isinstance(target, str):
             return Path(target)
-        if isinstance(target, Serializer):
+        if target is not None:
             return target
 
         assert target is None, f"Unexpected target {target}"
@@ -103,27 +102,15 @@ class Serializable(Generic[T], metaclass=ABCMeta):
         str
             A (ideally) unique string representing this `Serializable`
         """
-        return f"{type(self)}:{self.key}"
+        return f"{type(self).__name__}:{self.key}"
 
 
 S = TypeVar("S", bound=Serializable)
 
 
-# pylint: disable=too-few-public-methods
-class Serializer(Generic[S], metaclass=ABCMeta):
-    """
-    A base class for custom serializers that can be provided to `Serializable`s.
-    This is an alternative to default serialization which simply writes the
-    strings to a file.
-    """
-
-    @abstractmethod
-    def serialize(self, serializable: S) -> None:
-        """
-        Serializes the given `Serializable`.
-
-        Parameters
-        ----------
-        serializable : S
-            The target that should be serialized
-        """
+Serializer = Callable[[S], None]
+"""
+A base type for custom serializers that can be provided to `Serializable`s.
+This is an alternative to default serialization which simply writes the
+strings to a file.
+"""
