@@ -43,7 +43,7 @@ tex = MyCustomToolkit()
 # manually add new TeX (constant) definitions (\\newcommand)
 tex.newcommand("const", 1)
 
-# this overwrites the previous definition of 'constOne'
+# this overwrites the previous definition of 'cons'
 tex.newcommand("const", 3, mathmode=False)
 
 # add custom TeX strings that should be directly serialized
