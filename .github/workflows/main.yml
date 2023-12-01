@@ -1,0 +1,51 @@
+name: Run CI
+
+on: [push]
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup@v1
+        with:
+          python-version: "3.11"
+      - name: Check format
+        run: python -m tox run -e style
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup@v1
+        with:
+          python-version: "3.11"
+      - name: Lint
+        run: |
+          python -m tox run -e lint
+          python -m tox run -e lint_tests
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup@v1
+        with:
+          python-version: "3.11"
+      - name: Run type checks
+        run: |
+          python -m tox run -e typecheck
+          python -m tox run -e typecheck_tests
+
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup@v1
+        with:
+          python-version: "3.11"
+      - name: Run unittests
+        run: python -m tox run
