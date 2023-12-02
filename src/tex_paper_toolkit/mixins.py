@@ -5,7 +5,7 @@ serializing strings.
 """
 
 from typing import Any, Self, Optional, Protocol
-from tex_paper_toolkit.stringify import make_tex_identifier
+from tex_paper_toolkit.stringify import DigitSettings, make_tex_identifier
 from tex_paper_toolkit.serialization import Serializable, SerTarget
 
 
@@ -47,7 +47,7 @@ class NewCommand(Serializable):
         mathmode: bool = True,
         unit: str = "",
         str_format: str = "d",
-        spell_digits: bool = False,
+        spell_digits: DigitSettings = False,
         upcase_after_separator: bool = False,
         to_file: Optional[SerTarget] = None,
     ) -> None:
@@ -80,7 +80,7 @@ class NewCommand(Serializable):
             The format specifier to use when embedding the `value` into the
             generated TeX string.
 
-        spell_digits : bool (default: False)
+        spell_digits : "c" | bool (default: False)
             Replaces digits within the label with their written-out names.
 
         upcase_after_separator: bool (default: False)
@@ -126,7 +126,7 @@ class NewCommandMixin(ToolkitMixin):
         mathmode: bool = True,
         unit: str = "",
         str_format: str = "d",
-        spell_digits: bool = False,
+        spell_digits: DigitSettings = False,
         upcase_after_separator=False,
         to_file: Optional[SerTarget] = None,
         command: NewCommand | None = None,

@@ -4,6 +4,7 @@ and labels.
 """
 
 import re
+from typing import Literal
 
 DIGIT_LABELS = [
     "zero",
@@ -19,8 +20,11 @@ DIGIT_LABELS = [
 ]
 
 
+DigitSettings = Literal["c"] | bool
+
+
 def make_tex_identifier(
-    identifier: str, spell_digits=False, upcase_after_separator=False
+    identifier: str, spell_digits: DigitSettings = False, upcase_after_separator=False
 ) -> str:
     """
     Creates a valid TeX identifier from the given base string.
@@ -30,9 +34,10 @@ def make_tex_identifier(
     ----------
     identifier : str
         The string that should be converted.
-    spell_digits : bool (default: False)
+    spell_digits : "c" | bool (default: False)
         Specifies whether numbers contained within the string could be spelled
-        instead. Otherwise, numbers are omitted.
+        instead. Otherwise, numbers are omitted. The 'c' option additionally
+        capitalizes the digit names after replacement.
     upcase_after_separator : bool (default: False)
         Capitalizes individual parts of the string that appear after separation.
 
@@ -41,20 +46,25 @@ def make_tex_identifier(
     str
         A valid TeX string created from the given identifier.
     """
-    identifier_parts = identifier.split(r"[/\s:.,_-]")
+    identifier_parts = re.split(r"[^a-zA-Z0-9]", identifier)
 
     if upcase_after_separator:
         identifier_parts = [part.capitalize() for part in identifier_parts]
 
     tex_identifier = "".join(identifier_parts)
 
-    if spell_digits:
+    if spell_digits is not False:
 
         def is_num(c: str) -> bool:
             return "0" <= c <= "9"
 
+        def write_out(c: str) -> str:
+            ordinal = int(c)
+            converted = DIGIT_LABELS[ordinal]
+            return converted.capitalize() if spell_digits == "c" else converted
+
         tex_identifier = "".join(
-            [(DIGIT_LABELS[int(c)] if is_num(c) else c) for c in tex_identifier]
+            [(write_out(c) if is_num(c) else c) for c in tex_identifier]
         )
     else:
         tex_identifier = re.sub(r"\d", "", tex_identifier)
