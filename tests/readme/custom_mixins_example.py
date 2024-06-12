@@ -1,6 +1,7 @@
 """
 A simple example showcasing the use of custom mixins.
 """
+
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-function-docstring
 # pylint: disable=too-many-ancestors
