@@ -1,6 +1,7 @@
 """
 A simple example showcasing the use of the DSL.
 """
+
 from tex_paper_toolkit import DefaultToolkit
 
 # instantiate a toolkit object

@@ -2,7 +2,6 @@
 Module containing test utilities.s
 """
 
-
 from pathlib import Path
 
 
