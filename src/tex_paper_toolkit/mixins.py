@@ -38,7 +38,7 @@ class NewCommand(Serializable):
     Defines a serializable TeX constant definition (\\newcommand{<label>}{<value>}).
     """
 
-    # pylint: # pylint: disable=too-many-arguments
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
     def __init__(
         self,
         label: str,
@@ -117,7 +117,7 @@ class NewCommandMixin(ToolkitMixin):
     A toolkit mixin that enables definition of `NewCommand`s.
     """
 
-    # pylint: disable=too-many-arguments
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
     def newcommand(
         self,
         label: str,
